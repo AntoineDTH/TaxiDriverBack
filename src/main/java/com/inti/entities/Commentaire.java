@@ -1,5 +1,6 @@
 package com.inti.entities;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 
@@ -13,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-@Inheritance
+@DiscriminatorValue(value = "Commentaire")
 public class Commentaire extends Feedback{
 
 	private boolean isDealtWith;

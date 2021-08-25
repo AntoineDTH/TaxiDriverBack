@@ -9,7 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +39,9 @@ public class Reservation implements Serializable {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "voyage", referencedColumnName = "idCourse")
-	private Course voyage;
+	private Course course;
 
+	@ManyToMany(fetch = FetchType.LAZY,mappedBy = "reservations")
+	@JsonBackReference
 	private List<Utilisateur> clients;
 }

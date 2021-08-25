@@ -18,29 +18,29 @@ import com.inti.services.interfaces.IOffreService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/TaxiDriver")
+@RequestMapping(value = "/gestionOffre")
 public class OffreController {
 
 	@Autowired
 	IOffreService OffreService;
 
-	@PostMapping("/users")
+	@PostMapping("/offres")
 	public Offre saveOffre(@RequestBody Offre Offre) {
 		return OffreService.saveOffre(Offre);
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/offres")
 	public List<Offre> findAll() {
 		return OffreService.findAll();                                                                                                                                                                     
 	}
 
-	@RequestMapping(value = "/users/{idUser}", method = RequestMethod.GET)
-	public Offre findOne(@PathVariable("idUser") Long id) {
+	@RequestMapping(value = "/offres/{idOffre}", method = RequestMethod.GET)
+	public Offre findOne(@PathVariable("idOffre") Long id) {
 		return OffreService.findOne(id);
 	}
 
-	@DeleteMapping("/users/{idUser}")
-	public void deleteOffre(@PathVariable("idUser") Long id) {
+	@DeleteMapping("/offres/{idOffre}")
+	public void deleteOffre(@PathVariable("idOffre") Long id) {
 		OffreService.deleteOffre(id);
 	}
 }

@@ -3,6 +3,7 @@ package com.inti.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,11 +28,9 @@ public class Rapport implements Serializable{
 	private Long idRapport;
 	
 	// traduction de l'asso uml en java
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "Agence_ID", referencedColumnName = "idAgence")
 	private Agence agence;
-
-
 
 
 }

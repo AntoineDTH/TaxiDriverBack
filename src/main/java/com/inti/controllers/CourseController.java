@@ -18,29 +18,29 @@ import com.inti.services.interfaces.ICourseService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/TaxiDriver")
+@RequestMapping(value = "/gestionCourse")
 public class CourseController {
 
 	@Autowired
 	ICourseService CourseService;
 
-	@PostMapping("/users")
+	@PostMapping("/courses")
 	public Course saveCourse(@RequestBody Course Course) {
 		return CourseService.saveCourse(Course);
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/courses")
 	public List<Course> findAll() {
 		return CourseService.findAll();                                                                                                                                                                     
 	}
 
-	@RequestMapping(value = "/users/{idUser}", method = RequestMethod.GET)
-	public Course findOne(@PathVariable("idUser") Long id) {
+	@RequestMapping(value = "/courses/{idCourse}", method = RequestMethod.GET)
+	public Course findOne(@PathVariable("idCourse") Long id) {
 		return CourseService.findOne(id);
 	}
 
-	@DeleteMapping("/users/{idUser}")
-	public void deleteCourse(@PathVariable("idUser") Long id) {
+	@DeleteMapping("/courses/{idCourse}")
+	public void deleteCourse(@PathVariable("idCourse") Long id) {
 		CourseService.deleteCourse(id);
 	}
 }

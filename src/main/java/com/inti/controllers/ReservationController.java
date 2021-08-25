@@ -18,29 +18,29 @@ import com.inti.services.interfaces.IReservationService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/TaxiDriver")
+@RequestMapping(value = "/gestionReservation")
 public class ReservationController {
 
 	@Autowired
 	IReservationService ReservationService;
 
-	@PostMapping("/users")
+	@PostMapping("/reservations")
 	public Reservation saveReservation(@RequestBody Reservation Reservation) {
 		return ReservationService.saveReservation(Reservation);
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/reservations")
 	public List<Reservation> findAll() {
 		return ReservationService.findAll();                                                                                                                                                                     
 	}
 
-	@RequestMapping(value = "/users/{idUser}", method = RequestMethod.GET)
-	public Reservation findOne(@PathVariable("idUser") Long id) {
+	@RequestMapping(value = "/reservations/{idReservation}", method = RequestMethod.GET)
+	public Reservation findOne(@PathVariable("idReservation") Long id) {
 		return ReservationService.findOne(id);
 	}
 
-	@DeleteMapping("/users/{idUser}")
-	public void deleteReservation(@PathVariable("idUser") Long id) {
+	@DeleteMapping("/reservations/{idReservation}")
+	public void deleteReservation(@PathVariable("idReservation") Long id) {
 		ReservationService.deleteReservation(id);
 	}
 }

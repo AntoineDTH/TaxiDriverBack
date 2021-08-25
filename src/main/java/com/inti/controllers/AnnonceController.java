@@ -18,29 +18,29 @@ import com.inti.services.interfaces.IAnnonceService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/TaxiDriver")
+@RequestMapping(value = "/gestionAnnonce")
 public class AnnonceController {
 
 	@Autowired
 	IAnnonceService AnnonceService;
 
-	@PostMapping("/users")
+	@PostMapping("/annonces")
 	public Annonce saveAnnonce(@RequestBody Annonce Annonce) {
 		return AnnonceService.saveAnnonce(Annonce);
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/annonces")
 	public List<Annonce> findAll() {
 		return AnnonceService.findAll();                                                                                                                                                                     
 	}
 
-	@RequestMapping(value = "/users/{idUser}", method = RequestMethod.GET)
-	public Annonce findOne(@PathVariable("idUser") Long id) {
+	@RequestMapping(value = "/annonces/{idAnnonce}", method = RequestMethod.GET)
+	public Annonce findOne(@PathVariable("idAnnonce") Long id) {
 		return AnnonceService.findOne(id);
 	}
 
-	@DeleteMapping("/users/{idUser}")
-	public void deleteAnnonce(@PathVariable("idUser") Long id) {
+	@DeleteMapping("/annonces/{idAnnonce}")
+	public void deleteAnnonce(@PathVariable("idAnnonce") Long id) {
 		AnnonceService.deleteAnnonce(id);
 	}
 	

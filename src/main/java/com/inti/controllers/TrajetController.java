@@ -19,29 +19,29 @@ import com.inti.services.interfaces.ITrajetService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/TaxiDriver")
+@RequestMapping(value = "/gestionTrajet")
 public class TrajetController {
 
 	@Autowired
 	ITrajetService trajetService;
 
-	@PostMapping("/users")
+	@PostMapping("/trajets")
 	public Trajet saveTrajet(@RequestBody Trajet trajet) {
 		return trajetService.saveTrajet(trajet);
 	}
 
-	@GetMapping("/users")
+	@GetMapping("/trajets")
 	public List<Trajet> findAll() {
 		return trajetService.findAll();                                                                                                                                                                     
 	}
 
-	@RequestMapping(value = "/users/{idUser}", method = RequestMethod.GET)
-	public Trajet findOne(@PathVariable("idUser") Long id) {
+	@RequestMapping(value = "/trajets/{idTrajet}", method = RequestMethod.GET)
+	public Trajet findOne(@PathVariable("idTrajet") Long id) {
 		return trajetService.findOne(id);
 	}
 
-	@DeleteMapping("/users/{idUser}")
-	public void deleteTrajet(@PathVariable("idUser") Long id) {
+	@DeleteMapping("/trajets/{idTrajet}")
+	public void deleteTrajet(@PathVariable("idTrajet") Long id) {
 		trajetService.deleteTrajet(id);
 	}
 

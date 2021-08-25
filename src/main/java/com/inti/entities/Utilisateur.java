@@ -2,6 +2,7 @@ package com.inti.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -37,6 +38,7 @@ public class Utilisateur implements Serializable {
 	private Long idUtilisateur;
 	private String nom;
 	private String prenom;
+	
 	@Column(unique = true)
 	private String mail;
 	@Column(unique = true)
@@ -50,20 +52,21 @@ public class Utilisateur implements Serializable {
 	private Set<Role> roles = new HashSet<Role>();
 	private boolean enabled = true;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "utilisateur_id", referencedColumnName = "idUtilisateur")
-	@JsonBackReference
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "reservations_associees", joinColumns = {
+			@JoinColumn(name = "utilisateur", referencedColumnName = "idUtilisateur") }, inverseJoinColumns = {
+					@JoinColumn(name = "reservation", referencedColumnName = "idReservation") })
 	private Set<Reservation> reservations;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "agence_id", referencedColumnName = "idAgence")
-	@JsonBackReference
+	@JoinTable(name = "agence_liees", joinColumns = {
+			@JoinColumn(name = "utilisateur", referencedColumnName = "idUtilisateur") }, inverseJoinColumns = {
+					@JoinColumn(name = "agence", referencedColumnName = "idAgence") })
 	private Set<Agence> agences;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "utilisateur_id", referencedColumnName = "idUtilisateur")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idFeedback")
 	@JsonBackReference
-	private Set<Feedback> feedbacks;	
+	private List<Feedback> feedbacks;	
 	
 	/*Ajouter une image sous format binaire*/
 //	@Lob

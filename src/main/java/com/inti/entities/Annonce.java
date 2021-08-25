@@ -34,7 +34,7 @@ public class Annonce implements Serializable {
 
 	// Association UML
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "offres présentées", joinColumns = {
+	@JoinTable(name = "offres_presentees", joinColumns = {
 			@JoinColumn(name = "annonce", referencedColumnName = "idAnnonce") }, inverseJoinColumns = {
 					@JoinColumn(name = "offre", referencedColumnName = "idOffre") })
 	private List<Offre> offres;

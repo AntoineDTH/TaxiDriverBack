@@ -31,19 +31,18 @@ public class Agence implements Serializable{
 	private Long idAgence;
 	
 	// Traduction de l'asso uml en java
-	@OneToOne
-	@JoinColumn(name = "ID_RESPO")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_RESPO",referencedColumnName = "idUtilisateur")
 	private Utilisateur respoAgence;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)//(mappedBy = "Agence", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE,mappedBy = "idVehicule")//(mappedBy = "Agence", cascade = CascadeType.REMOVE)
 	private List<Vehicule> vehicules;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE,mappedBy = "idUtilisateur")
 	private List<Utilisateur> chauffeurs;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE,mappedBy = "idRapport")
 	private List<Rapport> rapports;
 	
-//  private List<Stats> stats;
 
 }

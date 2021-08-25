@@ -11,8 +11,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +22,7 @@ import lombok.ToString;
 @ToString
 @Data
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="FEEDBACK")
+@DiscriminatorColumn(name="TYPE")
 public abstract class Feedback {
 	
 	@Id
@@ -34,7 +32,6 @@ public abstract class Feedback {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id", referencedColumnName = "idUtilisateur")
-	@JsonBackReference
 	protected Utilisateur client;
 	
 }
