@@ -1,14 +1,14 @@
 package com.inti.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.annotation.Generated;
-import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,18 +22,17 @@ import lombok.ToString;
 @Builder
 @ToString
 @Data
-public class Trajet implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	private Long id;
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idTr;
-	
-	private String depart;
-	private String arrivee;
-	private Double distance;
-	private Date horaire;
+public class Reservation implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idRe;
+
+	// Associations UML
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "voyage", referencedColumnName = "idCo")
+	private Course voyage;
+
+	// private List<Utilisateur> clients;
 }

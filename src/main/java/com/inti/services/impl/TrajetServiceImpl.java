@@ -6,14 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.inti.entities.Trajet;
-import com.inti.repositories.TrajetRepository;
-import com.inti.services.interfaces.TrajetService;
+import com.inti.repositories.ITrajetRepository;
+import com.inti.services.interfaces.ITrajetService;
+
 
 @Service
-public class TrajetServiceImpl implements TrajetService{
+public class TrajetServiceImpl implements ITrajetService{
 
 	@Autowired
-	TrajetRepository trajetRepository;
+	ITrajetRepository trajetRepository;
 
 	@Override
 	public Trajet saveTrajet(Trajet trajet) {

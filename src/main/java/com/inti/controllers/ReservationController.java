@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,35 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inti.entities.Trajet;
-import com.inti.services.interfaces.ITrajetService;
+import com.inti.entities.Reservation;
+import com.inti.services.interfaces.IReservationService;
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/TaxiDriver")
-public class TrajetController {
+public class ReservationController {
 
 	@Autowired
-	ITrajetService trajetService;
+	IReservationService ReservationService;
 
 	@PostMapping("/users")
-	public Trajet saveTrajet(@RequestBody Trajet trajet) {
-		return trajetService.saveTrajet(trajet);
+	public Reservation saveReservation(@RequestBody Reservation Reservation) {
+		return ReservationService.saveReservation(Reservation);
 	}
 
 	@GetMapping("/users")
-	public List<Trajet> findAll() {
-		return trajetService.findAll();                                                                                                                                                                     
+	public List<Reservation> findAll() {
+		return ReservationService.findAll();                                                                                                                                                                     
 	}
 
 	@RequestMapping(value = "/users/{idUser}", method = RequestMethod.GET)
-	public Trajet findOne(@PathVariable("idUser") Long id) {
-		return trajetService.findOne(id);
+	public Reservation findOne(@PathVariable("idUser") Long id) {
+		return ReservationService.findOne(id);
 	}
 
 	@DeleteMapping("/users/{idUser}")
-	public void deleteTrajet(@PathVariable("idUser") Long id) {
-		trajetService.deleteTrajet(id);
+	public void deleteReservation(@PathVariable("idUser") Long id) {
+		ReservationService.deleteReservation(id);
 	}
-
 }
