@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.inti.entities.Commentaire;
 
-public interface CommentaireService {
+public interface ICommentaireService {
 	Commentaire saveCommentaire(Commentaire commentaire);
 
 	List<Commentaire> findAll();

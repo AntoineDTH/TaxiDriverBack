@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.inti.entities.Feedback;
 
-public interface FeedbackService {
+public interface IFeedbackService {
 	Feedback saveFeedback(Feedback feedback);
 
 	List<Feedback> findAll();

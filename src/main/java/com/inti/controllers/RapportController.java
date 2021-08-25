@@ -13,35 +13,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inti.entities.Commentaire;
-import com.inti.services.interfaces.ICommentaireService;
+import com.inti.entities.Rapport;
+import com.inti.services.interfaces.IRapportService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/gestionCommentaires")
-public class CommentaireController {
+@RequestMapping(value = "/gestionRapports")
+public class RapportController {
 	
 	@Autowired
-	ICommentaireService service;
+	IRapportService service;
 	
-	@PostMapping("/commentaires")
-	public Commentaire saveCommentaire(@RequestBody Commentaire commentaire) {
-		return service.saveCommentaire(commentaire);
+	@PostMapping("/rapports")
+	public Rapport saveRapport(@RequestBody Rapport rapport) {
+		return service.saveRapport(rapport);
 	}
 	
-	@GetMapping("/commentaires")
-	public List<Commentaire> findAll() {
+	@GetMapping("/rapports")
+	public List<Rapport> findAll() {
 		return service.findAll();
 	}
 	
-	@RequestMapping(value = "/commentaires/{idCommentaire}", method = RequestMethod.GET)
-	public Commentaire findOne(@PathVariable("idCommentaire") Long id) {
+	@RequestMapping(value = "/rapports/{idRapport}", method = RequestMethod.GET)
+	public Rapport findOne(@PathVariable("idRapport") Long id) {
 		return service.findOne(id);
 	}
 	
-	@DeleteMapping("/commentaires/{idCommentaire}")
-	public void deleteCommentaire(@PathVariable("idCommentaire") Long id) {
-		service.deleteCommentaire(id);
+	@DeleteMapping("/rapports/{idRapport}")
+	public void deleteRapport(@PathVariable("idRapport") Long id) {
+		service.deleteRapport(id);
 	}
 	
 }

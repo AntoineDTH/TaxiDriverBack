@@ -13,35 +13,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inti.entities.Commentaire;
-import com.inti.services.interfaces.ICommentaireService;
+import com.inti.entities.Vehicule;
+import com.inti.services.interfaces.IVehiculeService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/gestionCommentaires")
-public class CommentaireController {
+@RequestMapping(value = "/gestionVehicules")
+public class VehiculeController {
 	
 	@Autowired
-	ICommentaireService service;
+	IVehiculeService service;
 	
-	@PostMapping("/commentaires")
-	public Commentaire saveCommentaire(@RequestBody Commentaire commentaire) {
-		return service.saveCommentaire(commentaire);
+	@PostMapping("/vehicules")
+	public Vehicule saveVehicule(@RequestBody Vehicule vehicule) {
+		return service.saveVehicule(vehicule);
 	}
 	
-	@GetMapping("/commentaires")
-	public List<Commentaire> findAll() {
+	@GetMapping("/vehicules")
+	public List<Vehicule> findAll() {
 		return service.findAll();
 	}
 	
-	@RequestMapping(value = "/commentaires/{idCommentaire}", method = RequestMethod.GET)
-	public Commentaire findOne(@PathVariable("idCommentaire") Long id) {
+	@RequestMapping(value = "/vehicules/{idVehicule}", method = RequestMethod.GET)
+	public Vehicule findOne(@PathVariable("idVehicule") Long id) {
 		return service.findOne(id);
 	}
 	
-	@DeleteMapping("/commentaires/{idCommentaire}")
-	public void deleteCommentaire(@PathVariable("idCommentaire") Long id) {
-		service.deleteCommentaire(id);
+	@DeleteMapping("/vehicules/{idVehicule}")
+	public void deleteVehicule(@PathVariable("idVehicule") Long id) {
+		service.deleteVehicule(id);
 	}
 	
 }

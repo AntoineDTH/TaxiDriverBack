@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.inti.entities.Reclamation;
 
-public interface ReclamationService {
+public interface IReclamationService {
 	Reclamation saveReclamation(Reclamation reclamation);
 
 	List<Reclamation> findAll();

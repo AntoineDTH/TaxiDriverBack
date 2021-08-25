@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inti.entities.Role;
-import com.inti.services.interfaces.RoleService;
+import com.inti.services.interfaces.IRoleService;
 
 @CrossOrigin
 @RestController
@@ -22,7 +22,7 @@ import com.inti.services.interfaces.RoleService;
 public class RoleController {
 	
 	@Autowired
-	RoleService service;
+	IRoleService service;
 	
 	@PostMapping("/roles")
 	public Role saveRole(@RequestBody Role role) {

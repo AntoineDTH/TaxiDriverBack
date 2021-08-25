@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.inti.entities.Feedback;
-import com.inti.repositories.FeedbackRepository;
-import com.inti.services.interfaces.FeedbackService;
+import com.inti.repositories.IFeedbackRepository;
+import com.inti.services.interfaces.IFeedbackService;
 
 @Service
-public class FeedbackServiceImpl implements FeedbackService {
+public class FeedbackServiceImpl implements IFeedbackService {
 	@Autowired
-	FeedbackRepository feedbackRepository;
+	IFeedbackRepository feedbackRepository;
 
 	@Override
 	public Feedback saveFeedback(Feedback feedback) {

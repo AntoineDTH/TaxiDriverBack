@@ -23,27 +23,29 @@ import lombok.ToString;
 @Builder
 @ToString
 @Data
-public class Course implements Serializable{
+public class Course implements Serializable {
 
-	//Attributs
+	private static final long serialVersionUID = 1L;
+
+	// Attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idCo;
-	
-	private Double coutCalcule;
-	private boolean isAccepted=false;
+	private Long idCourse;
 
-	//Associations UML
+	private Double coutCalcule;
+	private boolean isAccepted = false;
+
+	// Associations UML
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "offre",referencedColumnName = "idOf")
+	@JoinColumn(name = "offre", referencedColumnName = "idOffre")
 	private Offre offre;
-	
+
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "trajet_id",referencedColumnName = "idTr")
+	@JoinColumn(name = "trajet_id", referencedColumnName = "idTrajet")
 	private Trajet trajet;
-	
-//	@OneToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name="chauffeur_id",referencedColumnName = "idUs")
-//	private Utilisateur chauffeur;
-	
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "chauffeur_id", referencedColumnName = "idUtilisateur")
+	private Utilisateur chauffeur;
+
 }

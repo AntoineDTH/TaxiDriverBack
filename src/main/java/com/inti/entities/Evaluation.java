@@ -5,7 +5,6 @@ import javax.persistence.Inheritance;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -14,7 +13,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-@Data
 @Inheritance
 public class Evaluation extends Feedback{
 

@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.inti.entities.Role;
-import com.inti.repositories.RoleRepository;
-import com.inti.services.interfaces.RoleService;
+import com.inti.repositories.IRoleRepository;
+import com.inti.services.interfaces.IRoleService;
 
 @Service
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl implements IRoleService {
 	@Autowired
-	RoleRepository roleRepository;
+	IRoleRepository roleRepository;
 
 	@Override
 	public Role saveRole(Role role) {

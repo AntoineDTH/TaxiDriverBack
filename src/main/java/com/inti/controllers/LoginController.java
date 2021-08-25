@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inti.entities.Utilisateur;
-import com.inti.services.interfaces.UtilisateurService;
+import com.inti.services.interfaces.IUtilisateurService;
 
 @CrossOrigin
 @RestController
@@ -16,7 +16,7 @@ import com.inti.services.interfaces.UtilisateurService;
 public class LoginController {
 	
 	@Autowired
-	UtilisateurService service;
+	IUtilisateurService service;
 	
 	public Utilisateur login(Principal principal) {
 		return service.findByUsername(principal.getName());

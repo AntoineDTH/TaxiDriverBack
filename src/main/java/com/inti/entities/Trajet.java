@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.annotation.Generated;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,9 +25,8 @@ public class Trajet implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private Long id;
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idTr;
+	private Long idTrajet;
 	
 	private String depart;
 	private String arrivee;

@@ -21,10 +21,12 @@ import lombok.ToString;
 @Data
 public class Offre implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+
 	//Attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idOf;
+	private Long idOffre;
 	
 	private String promotion;
 }

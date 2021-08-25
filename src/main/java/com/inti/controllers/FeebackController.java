@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inti.entities.Feedback;
-import com.inti.services.interfaces.FeedbackService;
+import com.inti.services.interfaces.IFeedbackService;
 
 @CrossOrigin
 @RestController
@@ -22,7 +22,7 @@ import com.inti.services.interfaces.FeedbackService;
 public class FeebackController {
 	
 	@Autowired
-	FeedbackService service;
+	IFeedbackService service;
 	
 	@PostMapping("/feedbacks")
 	public Feedback saveFeedback(@RequestBody Feedback feedback) {

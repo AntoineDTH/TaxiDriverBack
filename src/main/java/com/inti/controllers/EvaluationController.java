@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inti.entities.Evaluation;
-import com.inti.services.interfaces.EvaluationService;
+import com.inti.services.interfaces.IEvaluationService;
 
 @CrossOrigin
 @RestController
@@ -22,7 +22,7 @@ import com.inti.services.interfaces.EvaluationService;
 public class EvaluationController {
 	
 	@Autowired
-	EvaluationService service;
+	IEvaluationService service;
 	
 	@PostMapping("/evaluations")
 	public Evaluation saveEvaluation(@RequestBody Evaluation evaluation) {

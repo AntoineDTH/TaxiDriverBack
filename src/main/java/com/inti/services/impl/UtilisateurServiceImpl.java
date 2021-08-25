@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.inti.entities.Utilisateur;
-import com.inti.repositories.UtilisateurRepository;
-import com.inti.services.interfaces.UtilisateurService;
+import com.inti.repositories.IUtilisateurRepository;
+import com.inti.services.interfaces.IUtilisateurService;
 
 @Service
-public class UtilisateurServiceImpl implements UtilisateurService {
+public class UtilisateurServiceImpl implements IUtilisateurService {
 
 	@Autowired
-	UtilisateurRepository utilisteurRepository;
+	IUtilisateurRepository utilisteurRepository;
 
 	@Override
 	public Utilisateur saveUtilisateur(Utilisateur utilisateur) {

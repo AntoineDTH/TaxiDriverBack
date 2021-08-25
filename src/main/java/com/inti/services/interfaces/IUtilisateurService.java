@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.inti.entities.Utilisateur;
 
-public interface UtilisateurService {
+public interface IUtilisateurService {
 	Utilisateur saveUtilisateur(Utilisateur utilisateur);
 
 	List<Utilisateur> findAll();

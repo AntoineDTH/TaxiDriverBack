@@ -1,6 +1,7 @@
 package com.inti.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,15 +25,17 @@ import lombok.ToString;
 @Data
 public class Reservation implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idRe;
+	private Long idReservation;
 
 	// Associations UML
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "voyage", referencedColumnName = "idCo")
+	@JoinColumn(name = "voyage", referencedColumnName = "idCourse")
 	private Course voyage;
 
-	// private List<Utilisateur> clients;
+	private List<Utilisateur> clients;
 }

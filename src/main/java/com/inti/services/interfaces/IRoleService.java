@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.inti.entities.Role;
 
-public interface RoleService {
+public interface IRoleService {
 	Role saveRole(Role role);
 
 	List<Role> findAll();

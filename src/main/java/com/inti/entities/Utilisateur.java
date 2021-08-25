@@ -50,18 +50,20 @@ public class Utilisateur implements Serializable {
 	private Set<Role> roles = new HashSet<Role>();
 	private boolean enabled = true;
 	
-//	@OneToMany(fetch = FetchType.EAGER)
-//	@JsonBackReference
-//	private Set<Reservation> reservations;
-//	
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	@JsonBackReference
-//	private Set<Agence> agences;
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "utilisateur_id", referencedColumnName = "idUtilisateur")
+	@JsonBackReference
+	private Set<Reservation> reservations;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "agence_id", referencedColumnName = "idAgence")
+	@JsonBackReference
+	private Set<Agence> agences;
 	
 	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "utilisateur_id", referencedColumnName = "idUtilisateur")
 	@JsonBackReference
-	private Set<Feedback> feedbacks;
-	
+	private Set<Feedback> feedbacks;	
 	
 	/*Ajouter une image sous format binaire*/
 //	@Lob

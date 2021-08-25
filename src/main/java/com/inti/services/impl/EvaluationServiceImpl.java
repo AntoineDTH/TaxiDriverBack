@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.inti.entities.Evaluation;
-import com.inti.repositories.EvaluationRepository;
-import com.inti.services.interfaces.EvaluationService;
+import com.inti.repositories.IEvaluationRepository;
+import com.inti.services.interfaces.IEvaluationService;
 
 @Service
-public class EvaluationServiceImpl implements EvaluationService {
+public class EvaluationServiceImpl implements IEvaluationService {
 	@Autowired
-	EvaluationRepository evaluationRepository;
+	IEvaluationRepository evaluationRepository;
 
 	@Override
 	public Evaluation saveEvaluation(Evaluation evaluation) {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inti.entities.Reclamation;
-import com.inti.services.interfaces.ReclamationService;
+import com.inti.services.interfaces.IReclamationService;
 
 @CrossOrigin
 @RestController
@@ -22,7 +22,7 @@ import com.inti.services.interfaces.ReclamationService;
 public class ReclamationController {
 	
 	@Autowired
-	ReclamationService service;
+	IReclamationService service;
 	
 	@PostMapping("/reclamations")
 	public Reclamation saveReclamation(@RequestBody Reclamation reclamation) {

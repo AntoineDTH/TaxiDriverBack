@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.inti.entities.Feedback;
 
 @Repository
-public interface FeedbackRepository extends JpaRepository<Feedback, Long>{
+public interface IFeedbackRepository extends JpaRepository<Feedback, Long>{
 
 }

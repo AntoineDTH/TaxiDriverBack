@@ -1,7 +1,6 @@
 package com.inti.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +12,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 
 @Entity
 @NoArgsConstructor

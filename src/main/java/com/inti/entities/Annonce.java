@@ -26,14 +26,16 @@ import lombok.ToString;
 @Data
 public class Annonce implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idAn;
+	private Long idAnnonce;
 
 	// Association UML
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "offres présentées", joinColumns = {
-			@JoinColumn(name = "annonce", referencedColumnName = "idAn") }, inverseJoinColumns = {
-					@JoinColumn(name = "offre", referencedColumnName = "idOf") })
+			@JoinColumn(name = "annonce", referencedColumnName = "idAnnonce") }, inverseJoinColumns = {
+					@JoinColumn(name = "offre", referencedColumnName = "idOffre") })
 	private List<Offre> offres;
 }

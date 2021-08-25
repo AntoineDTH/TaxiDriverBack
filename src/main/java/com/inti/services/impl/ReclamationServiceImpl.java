@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.inti.entities.Reclamation;
-import com.inti.repositories.ReclamationRepository;
-import com.inti.services.interfaces.ReclamationService;
+import com.inti.repositories.IReclamationRepository;
+import com.inti.services.interfaces.IReclamationService;
 
 @Service
-public class ReclamationServiceImpl implements ReclamationService {
+public class ReclamationServiceImpl implements IReclamationService {
 	@Autowired
-	ReclamationRepository reclamationRepository;
+	IReclamationRepository reclamationRepository;
 
 	@Override
 	public Reclamation saveReclamation(Reclamation reclamation) {

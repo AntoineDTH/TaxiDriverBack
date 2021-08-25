@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.inti.entities.Evaluation;
 
-public interface EvaluationService {
+public interface IEvaluationService {
 	Evaluation saveEvaluation(Evaluation evaluation);
 
 	List<Evaluation> findAll();

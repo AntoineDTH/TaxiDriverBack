@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inti.entities.Utilisateur;
-import com.inti.services.interfaces.UtilisateurService;
+import com.inti.services.interfaces.IUtilisateurService;
 
 @CrossOrigin
 @RestController
@@ -23,7 +23,7 @@ import com.inti.services.interfaces.UtilisateurService;
 public class UtilisateurController {
 	
 	@Autowired
-	UtilisateurService service;
+	IUtilisateurService service;
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
