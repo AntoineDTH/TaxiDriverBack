@@ -40,4 +40,9 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
 		return utilisteurRepository.findByUsername(username);
 	}
 
+	@Override
+	public List<Utilisateur> triChauffeur() {
+		return utilisteurRepository.triChauffeur();
+	}
+
 }

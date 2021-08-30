@@ -17,5 +17,16 @@ import lombok.ToString;
 @DiscriminatorValue(value = "Réclamation")
 public class Reclamation extends Feedback{
 
-	private Annonce annonce;
+	private boolean isDealtWith;
+	private Course course;
+	
+	public boolean isDealtWith() {
+		return isDealtWith;
+	}
+	public void setDealtWith(boolean isDealtWith) {
+		this.isDealtWith = isDealtWith;
+	}
+	
+	
+	
 }

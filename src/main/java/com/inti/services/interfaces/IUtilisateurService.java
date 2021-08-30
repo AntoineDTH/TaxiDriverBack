@@ -14,4 +14,6 @@ public interface IUtilisateurService {
 	void deleteUtilisateur(Long id);
 	
 	Utilisateur findByUsername(String username);
+	
+	List<Utilisateur> triChauffeur();
 }

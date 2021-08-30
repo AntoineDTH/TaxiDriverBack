@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -45,6 +46,8 @@ public class Utilisateur implements Serializable {
 	private String username;
 	private String password;
 	
+	private double noteMoyenne;
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "profil", joinColumns = {
 			@JoinColumn(name = "id_utilisateur", referencedColumnName = "idUtilisateur") }, inverseJoinColumns = {
@@ -69,7 +72,7 @@ public class Utilisateur implements Serializable {
 	private List<Feedback> feedbacks;	
 	
 	/*Ajouter une image sous format binaire*/
-//	@Lob
-//	private byte[] image;
+	@Lob
+	private byte[] image;
 
 }

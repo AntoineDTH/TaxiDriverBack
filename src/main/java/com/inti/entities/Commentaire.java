@@ -17,6 +17,5 @@ import lombok.ToString;
 @DiscriminatorValue(value = "Commentaire")
 public class Commentaire extends Feedback{
 
-	private boolean isDealtWith;
-	private Course course;
+	private Annonce annonce;
 }

@@ -34,4 +34,5 @@ public abstract class Feedback {
 	@JoinColumn(name = "client_id", referencedColumnName = "idUtilisateur")
 	protected Utilisateur client;
 	
+	
 }

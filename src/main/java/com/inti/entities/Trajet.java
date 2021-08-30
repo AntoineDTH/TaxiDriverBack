@@ -30,7 +30,16 @@ public class Trajet implements Serializable{
 	
 	private String depart;
 	private String arrivee;
-	private Double distance;
+	private int distance;
 	private Date horaire;
+	
+	public Trajet(String depart, String arrivee, int distance, Date horaire) {
+		super();
+		this.depart = depart;
+		this.arrivee = arrivee;
+		this.distance = distance;
+		this.horaire = horaire;
+	}
 
+	
 }

@@ -1,6 +1,8 @@
 package com.inti.controllers;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,23 +13,43 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inti.entities.Annonce;
+import com.inti.entities.Commentaire;
+import com.inti.entities.Course;
+import com.inti.entities.Evaluation;
+import com.inti.entities.Reclamation;
+import com.inti.entities.Reservation;
+import com.inti.entities.Trajet;
 import com.inti.entities.Utilisateur;
+import com.inti.services.interfaces.ICommentaireService;
+import com.inti.services.interfaces.ICourseService;
+import com.inti.services.interfaces.IEvaluationService;
+import com.inti.services.interfaces.IReclamationService;
+import com.inti.services.interfaces.IReservationService;
 import com.inti.services.interfaces.IUtilisateurService;
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/gestionUsers")
 public class UtilisateurController {
-	
+
 	@Autowired
 	IUtilisateurService service;
 	@Autowired
+	ICourseService serviceCourse;
+	@Autowired
+	IReservationService serviceResa;
+	@Autowired
+	ICommentaireService serviceCom;
+	@Autowired
+	IEvaluationService serviceEval;
+	@Autowired
+	IReclamationService serviceReclam;
+	@Autowired
 	PasswordEncoder passwordEncoder;
-	
-	//@RequestMapping(value = "/users", method = RequestMethod.POST)
+
 	@PostMapping("/users")
 	public Utilisateur saveUtilisateur(@RequestBody Utilisateur utilisateur) {
 		Utilisateur user = new Utilisateur();
@@ -38,27 +60,106 @@ public class UtilisateurController {
 		user.setRoles(utilisateur.getRoles());
 		return service.saveUtilisateur(user);
 	}
-	
-	//@RequestMapping(value = "/users", method = RequestMethod.GET)
+
 	@GetMapping("/users")
 	public List<Utilisateur> findAll() {
 		return service.findAll();
 	}
-	
-	@RequestMapping(value = "/users/{idUser}", method = RequestMethod.GET)
-	//@GetMapping("/users/{idUser}")
+
+	@GetMapping("/users/{idUser}")
 	public Utilisateur findOne(@PathVariable("idUser") Long id) {
 		return service.findOne(id);
 	}
-//	@GetMapping("/users")
-//	public Utilisateur findOne(@RequestParam("idUser") Long id) {
-//		return service.findOne(id);
-//	}
-	
-	//@RequestMapping(value = "/users/{idUser}", method = RequestMethod.DELETE)
+
 	@DeleteMapping("/users/{idUser}")
 	public void deleteUtilisateur(@PathVariable("idUser") Long id) {
 		service.deleteUtilisateur(id);
 	}
+
+	@PostMapping("/course")
+	public Course creerCourse(@RequestBody String arrivee, @RequestBody String depart, @RequestBody Date horaire,
+			@RequestBody Utilisateur chauffeur) {
+
+		Random rand = new Random();
+				
+		Trajet trajet = new Trajet(depart, arrivee, rand.ints(20, 50).findFirst().getAsInt(), horaire);
+
+		Course course = new Course();
+		course.setAccepted(false);
+		course.setTrajet(trajet);
+		course.setChauffeur(chauffeur);
+
+		return serviceCourse.saveCourse(course);
+	}
+
+	@PostMapping("/reservation")
+	public Reservation creerReservation(@RequestBody Course course, @RequestBody List<Utilisateur> clients) {
+
+		Reservation resa = new Reservation();
+		resa.setCourse(course);
+		resa.setClients(clients);
+
+		return serviceResa.saveReservation(resa);
+	}
+
+	@PostMapping("/evaluation")
+	public Evaluation creerEval(@RequestBody String com,@RequestBody Utilisateur client,@RequestBody Utilisateur chauffeur,@RequestBody double note) {
+		
+		Evaluation eval = new Evaluation(chauffeur, note);
+		eval.setCommentaire(com);
+		eval.setClient(client);
+				
+		return serviceEval.saveEvaluation(eval);
+	}
 	
+	@PostMapping("/commentaire")
+	public Commentaire creerCom(@RequestBody String com,@RequestBody Utilisateur client,@RequestBody Annonce annonce) {
+		
+		Commentaire commentaire = new Commentaire(annonce);
+		commentaire.setClient(client);
+		commentaire.setCommentaire(com);
+		
+		return serviceCom.saveCommentaire(commentaire);
+	}
+	
+	@PostMapping("/reclamation")
+	public Reclamation creerReclam(@RequestBody String com,@RequestBody Utilisateur client,@RequestBody Course course) {
+		
+		Reclamation reclam = new Reclamation(false,course);
+		reclam.setClient(client);
+		reclam.setCommentaire(com);
+		
+		return serviceReclam.saveReclamation(reclam);
+	}
+	
+	@GetMapping("/course/{id}")
+	public Course validerCourse(@PathVariable("id") Long id) {
+		
+		Course course = serviceCourse.findOne(id);
+		course.setAccepted(true);
+		
+		return serviceCourse.saveCourse(course);
+	}
+	
+	@GetMapping("/reclamation/{id}")
+	public Reclamation traiterReclam(@PathVariable("id") Long id) {
+		
+		Reclamation reclamIn = serviceReclam.findOne(id);
+		reclamIn.setDealtWith(true);
+			
+		return serviceReclam.saveReclamation(reclamIn);
+	}
+	
+	@GetMapping("/tri_chauffeur")
+	public List<Utilisateur> triChauffeur(){
+		return service.triChauffeur();
+	}
+	
+	@GetMapping("/calcul/{id}")
+	public Double simulCout(@PathVariable("id") Long id) {
+		
+		Course course = serviceCourse.findOne(id);
+		
+		return 6.9*course.getTrajet().getDistance();
+	}
 }

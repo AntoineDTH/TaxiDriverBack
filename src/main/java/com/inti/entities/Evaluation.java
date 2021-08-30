@@ -24,4 +24,6 @@ public class Evaluation extends Feedback{
 	@JoinColumn(name="chauffeur",referencedColumnName = "idUtilisateur")
 	private Utilisateur utilisateur; // Chauffeur
 	private double note;
+	
+	
 }
