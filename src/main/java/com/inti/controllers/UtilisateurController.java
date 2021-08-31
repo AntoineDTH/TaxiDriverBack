@@ -1,6 +1,6 @@
 package com.inti.controllers;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,6 +24,7 @@ import com.inti.entities.Reclamation;
 import com.inti.entities.Reservation;
 import com.inti.entities.Trajet;
 import com.inti.entities.Utilisateur;
+import com.inti.services.interfaces.IAnnonceService;
 import com.inti.services.interfaces.ICommentaireService;
 import com.inti.services.interfaces.ICourseService;
 import com.inti.services.interfaces.IEvaluationService;
@@ -48,6 +49,8 @@ public class UtilisateurController {
 	IEvaluationService serviceEval;
 	@Autowired
 	IReclamationService serviceReclam;
+	@Autowired
+	IAnnonceService serviceAnnonce;
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -82,12 +85,16 @@ public class UtilisateurController {
 	
 	//Services métiers
 	@PostMapping("/course")
-	public Course creerCourse(@RequestParam("arrivee") String arrivee, @RequestParam("depart") String depart, @RequestParam("horaire") Date horaire,
-			@RequestParam("chauffeur") Utilisateur chauffeur) {
+	public Course creerCourse(@RequestParam("arrivee") String arrivee, @RequestParam("depart") String depart, @RequestParam("idchauffeur") String idChauffeur) {
 
 		Random rand = new Random();
 				
-		Trajet trajet = new Trajet(depart, arrivee, rand.ints(20, 50).findFirst().getAsInt(), horaire);
+		Trajet trajet = new Trajet();
+		trajet.setArrivee(arrivee);
+		trajet.setDepart(depart);
+		trajet.setDistance(rand.ints(20, 50).findFirst().getAsInt());
+		
+		Utilisateur chauffeur = service.findOne(Long.parseLong(idChauffeur));
 
 		Course course = new Course();
 		course.setAccepted(false);
@@ -98,9 +105,15 @@ public class UtilisateurController {
 	}
 
 	@PostMapping("/reservation")
-	public Reservation creerReservation(@RequestParam("course") Course course, @RequestParam("clients") List<Utilisateur> clients) {
+	public Reservation creerReservation(@RequestParam("idcourse") String idCourse, @RequestParam("idclients") String client) {
 
 		Reservation resa = new Reservation();
+		
+		Course course = serviceCourse.findOne(Long.parseLong(idCourse));
+		List<Utilisateur> clients = new ArrayList<Utilisateur>();
+		Utilisateur clIn = service.findOne(Long.parseLong(client));
+		clients.add(clIn);
+		
 		resa.setCourse(course);
 		resa.setClients(clients);
 
@@ -108,9 +121,12 @@ public class UtilisateurController {
 	}
 
 	@PostMapping("/evaluation")
-	public Evaluation creerEval(@RequestParam("commentaire") String com,@RequestParam("client") Utilisateur client,@RequestParam("chauffeur") Utilisateur chauffeur,@RequestParam("note") double note) {
+	public Evaluation creerEval(@RequestParam("commentaire") String com,@RequestParam("client") String idclient,@RequestParam("chauffeur") String idchauffeur,@RequestParam("note") String sNote) {
 		
-		Evaluation eval = new Evaluation(chauffeur, note);
+		Utilisateur chauffeur = service.findOne(Long.parseLong(idchauffeur));
+		Utilisateur client =service.findOne(Long.parseLong(idclient));
+		
+		Evaluation eval = new Evaluation(chauffeur, Double.parseDouble(sNote));
 		eval.setCommentaire(com);
 		eval.setClient(client);
 				
@@ -118,7 +134,10 @@ public class UtilisateurController {
 	}
 	
 	@PostMapping("/commentaire")
-	public Commentaire creerCom(@RequestParam("commentaire") String com,@RequestParam("client") Utilisateur client,@RequestParam("annonce") Annonce annonce) {
+	public Commentaire creerCom(@RequestParam("commentaire") String com,@RequestParam("client") String idClient,@RequestParam("annonce") String idAnnonce) {
+		
+		Annonce annonce = serviceAnnonce.findOne(Long.parseLong(idAnnonce));
+		Utilisateur client = service.findOne(Long.parseLong(idClient));
 		
 		Commentaire commentaire = new Commentaire(annonce);
 		commentaire.setClient(client);
@@ -128,7 +147,10 @@ public class UtilisateurController {
 	}
 	
 	@PostMapping("/reclamation")
-	public Reclamation creerReclam(@RequestParam("commentaire") String com,@RequestParam("client") Utilisateur client,@RequestParam("course") Course course) {
+	public Reclamation creerReclam(@RequestParam("commentaire") String com,@RequestParam("client") String idClient,@RequestParam("course") String idCourse) {
+		
+		Utilisateur client = service.findOne(Long.parseLong(idClient));
+		Course course = serviceCourse.findOne(Long.parseLong(idCourse));
 		
 		Reclamation reclam = new Reclamation(false,course);
 		reclam.setClient(client);
